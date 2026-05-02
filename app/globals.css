@@ -1,26 +1,81 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --base:       #080808;
+  --surface:    #101010;
+  --elevated:   #181818;
+  --line:       #232323;
+  --line-soft:  #2e2e2e;
+  --fg:         #f5f5f5;
+  --dim:        #888888;
+  --ghost:      #444444;
+  --success:    #6ee7b7;
+  --warn:       #fcd34d;
+  --danger:     #fca5a5;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+[data-theme='light'] {
+  --base:       #ffffff;
+  --surface:    #f9f9f9;
+  --elevated:   #f0f0f0;
+  --line:       #e5e5e5;
+  --line-soft:  #d4d4d4;
+  --fg:         #0a0a0a;
+  --dim:        #525252;
+  --ghost:      #a3a3a3;
+  --success:    #16a34a;
+  --warn:       #ca8a04;
+  --danger:     #dc2626;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@theme {
+  --color-base:       var(--base);
+  --color-surface:    var(--surface);
+  --color-elevated:   var(--elevated);
+  --color-line:       var(--line);
+  --color-line-soft:  var(--line-soft);
+  --color-fg:         var(--fg);
+  --color-dim:        var(--dim);
+  --color-ghost:      var(--ghost);
+  --color-success:    var(--success);
+  --color-warn:       var(--warn);
+  --color-danger:     var(--danger);
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ── Base ── */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { height: 100%; transition: background-color 300ms ease, color 300ms ease; }
+a { text-decoration: none; color: inherit; }
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #232323; border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: #444; }
+
+/* ── Animations ── */
+@keyframes ping-slow {
+  0%   { transform: scale(1); opacity: 0.3; }
+  70%  { transform: scale(1.8); opacity: 0; }
+  100% { transform: scale(1.8); opacity: 0; }
 }
+.animate-ping-slow::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: currentColor;
+  animation: ping-slow 2s ease-out infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+.animate-blink { animation: blink 1s step-end infinite; }
+
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-slide-up { animation: slide-up 0.25s ease forwards; }
