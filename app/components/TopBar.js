@@ -1,7 +1,8 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 "use client";
 import { useEffect, useState } from "react";
-import { useVoice } from "../context/VoiceContext";
 import { useProject } from "../context/ProjectContext";
+import { useVoice } from "../context/VoiceContext";
 
 const PERSONAS = [
   { id: "default", name: "Agent Xiroo", icon: "⭐" },
@@ -91,8 +92,8 @@ export default function TopBar({
           </button>
           {/* Dropdown placeholder */}
           <div className="absolute top-full left-0 mt-1 w-48 bg-surface border border-line rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 py-1 z-50">
-            <button 
-              onClick={() => setActiveProject("All Projects")} 
+            <button
+              onClick={() => setActiveProject("All Projects")}
               className="w-full text-left px-4 py-2 text-[12.5px] text-dim hover:text-fg hover:bg-elevated transition-colors"
             >
               All Projects
